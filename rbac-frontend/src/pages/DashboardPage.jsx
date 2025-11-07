@@ -1,17 +1,28 @@
-import { useAuth } from "@/store/auth";
-import { Button } from "@/components/ui/button";
+import StatsCardsGrid from "@/components/dashboard/StatsCardsGrid";
+import RoleActions from "@/components/dashboard/RoleActions";
+import RolePieChart from "@/components/dashboard/RolePieChart";
+import RecentActivityTable from "@/components/dashboard/RecentActivityTable";
 
 export default function DashboardPage() {
-  const user = useAuth((s) => s.user);
-  const logout = useAuth((s) => s.logout);
-
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="space-y-3 text-center">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-gray-600">Hi, {user?.name || user?.email}! Role: <b>{user?.role}</b></p>
-        <Button variant="secondary" onClick={logout}>Logout</Button>
+    <div className="p-6 space-y-6">
+      <div>
+        <h1 className="text-2xl font-semibold mb-1">Dashboard</h1>
+        <p className="text-gray-600">Welcome to your dashboard!</p>
+      </div>
+
+      {/* Stats Cards */}
+      <StatsCardsGrid />
+
+      <RoleActions />
+
+
+      {/* Pie Chart + Recent Activity */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <RolePieChart />
+        <RecentActivityTable />
       </div>
     </div>
   );
 }
+
